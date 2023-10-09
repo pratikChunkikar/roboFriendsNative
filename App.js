@@ -1,11 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,SafeAreaView } from 'react-native';
+
+import { StyleSheet, Text, StatusBar, SafeAreaView, ScrollView } from 'react-native';
+import CardList from './components/cardList';
+import { robots } from './components/robots';
+import { useState } from 'react';
+
 
 export default function App() {
+  const [bots, setBots] = useState(robots)
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Open up App.js to start work</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.text}>ROBO FRIENDS</Text>
+     <ScrollView>
+     <CardList
+        r2d2={bots}
+      />
+     </ScrollView>
+      
     </SafeAreaView>
   );
 }
@@ -13,8 +23,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  text:{
+    fontSize: 24,
+    fontWeight:'100',
+   padding:10,
+   paddingLeft:120,
   },
 });
